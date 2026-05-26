@@ -586,16 +586,11 @@ function MenuView({ menu, lang, setLang, shop, onLogoTap }) {
       {/* ══ HERO ══ */}
       <div style={{
         position:"relative", overflow:"hidden",
-        background:"linear-gradient(172deg, #0D0500 0%, #1A0A00 48%, #2C1500 100%)",
+        background:"#000",
         paddingBottom:24,
       }}>
-        <div style={{ position:"absolute",inset:0,pointerEvents:"none",
-          background:"radial-gradient(ellipse at 22% 115%,rgba(192,57,43,.4),transparent 50%),radial-gradient(ellipse at 78% 110%,rgba(255,107,26,.18),transparent 48%)" }}/>
-        <div style={{ position:"absolute",inset:0,pointerEvents:"none",
-          backgroundImage:"linear-gradient(rgba(212,160,23,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(212,160,23,.04) 1px,transparent 1px)",
-          backgroundSize:"52px 52px" }}/>
-
-        {/* lang toggle */}
+         
+        {/* lang toggle */
         <div style={{ position:"absolute",top:14,right:14,zIndex:10,display:"flex",borderRadius:999,overflow:"hidden",border:"1px solid rgba(212,160,23,.35)" }}>
           {["it","zh"].map(l=>(
             <button key={l} onClick={()=>setLang(l)} style={{
