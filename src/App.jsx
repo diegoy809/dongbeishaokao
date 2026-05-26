@@ -590,7 +590,7 @@ function MenuView({ menu, lang, setLang, shop, onLogoTap }) {
         paddingBottom:24,
       }}>
          
-        {/* lang toggle */
+        {/* lang toggle */}
         <div style={{ position:"absolute",top:14,right:14,zIndex:10,display:"flex",borderRadius:999,overflow:"hidden",border:"1px solid rgba(212,160,23,.35)" }}>
           {["it","zh"].map(l=>(
             <button key={l} onClick={()=>setLang(l)} style={{
