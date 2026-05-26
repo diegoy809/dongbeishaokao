@@ -34,8 +34,8 @@ const DEFAULT_MENU = [
   { id: "item-16", category: "liangcai", zh: { name: "皮蛋豆腐", desc: "嫩滑豆腐+皮蛋，浇秘制酱汁，口感层次丰富" }, it: { name: "Tofu con Uovo in Salmoia", desc: "Tofu morbido con uovo cinese conservato, salsa speciale" }, price: 6.5, image: null, badge: "", status: "active" },
   { id: "item-17", category: "liangcai", zh: { name: "东北大拉皮", desc: "透明宽粉+黄瓜丝+芝麻酱，Q弹爽滑" }, it: { name: "Spaghetti Dongbei in Salsa Sesamo", desc: "Amidi trasparenti larghi, cetriolo, salsa di sesamo" }, price: 7.0, image: null, badge: "speciale", status: "active" },
   // 主食 Piatti Principali
-  { id: "item-18", category: "zhushi"
-const DEFAULT_SHOP_INFO = {
+  { id: "item-18", category: "zhushi"}];
+   const DEFAULT_SHOP_INFO = {
   name: "东北烧烤",
   nameit: "Dongbei BBQ Roma",
   address: "Piazza Dante 5, 00185 Roma",
