@@ -315,6 +315,30 @@ function EditModal({item,onSave,onClose}){
         <div style={{marginBottom:12}}><div style={{fontSize:".75rem",color:"#999",marginBottom:5}}>Nome Italiano</div><input style={inp({marginBottom:6})} value={form.it?.name||""} onChange={e=>setForm(f=>({...f,it:{...f.it,name:e.target.value}}))} placeholder="Es: Ostriche alla brace"/><div style={{fontSize:".75rem",color:"#999",marginBottom:5}}>Ingredienti (IT)</div><input style={inp()} value={form.it?.desc||""} onChange={e=>setForm(f=>({...f,it:{...f.it,desc:e.target.value}}))} placeholder="Es: ostriche, aglio, salsa di soia"/></div>
         <div style={{marginBottom:14}}><div style={{fontSize:".75rem",color:"#999",marginBottom:5}}>价格 / Prezzo (€)</div><input style={inp()} type="number" step="0.5" min="0" value={form.price} onChange={e=>setForm(f=>({...f,price:parseFloat(e.target.value)||0}))}/></div>
         <div style={{display:"flex",gap:8,marginBottom:14}}>{[["spicy","🌶 辛辣"],["frozen","❄️ 冷冻"],["preorder","📋 需预定"]].map(([k,lb])=>(<button key={k} onClick={()=>setForm(f=>({...f,[k]:!f[k]}))} style={{flex:1,padding:"9px 4px",borderRadius:9,border:"none",cursor:"pointer",fontSize:".75rem",background:form[k]?"#1A0A00":"#F0E8E0",color:form[k]?"#D4A017":"#666"}}>{lb}</button>))}</div>
+        <div style={{marginBottom:18}}>
+          <div style={{fontSize:".75rem",color:"#999",marginBottom:6}}>过敏原 / Allergeni</div>
+          <div style={{display:"flex",flexWrap:"wrap",gap:7}}>
+            {ALLERGENS.map(a=>{
+              const selected=(Array.isArray(form.allergens)?form.allergens:[]).includes(a.id);
+              return(
+                <button
+                  key={a.id}
+                  onClick={()=>{
+                    setForm(f=>{
+                      const cur=Array.isArray(f.allergens)?f.allergens:[];
+                      const next=cur.includes(a.id)?cur.filter(x=>x!==a.id):[...cur,a.id];
+                      return {...f,allergens:next};
+                    });
+                  }}
+                  style={{padding:"6px 12px",borderRadius:999,border:"none",cursor:"pointer",fontSize:".75rem",background:selected?"#1A0A00":"#F0E8E0",color:selected?"#D4A017":"#666",display:"flex",alignItems:"center",gap:6}}
+                >
+                  <span style={{fontSize:".9rem"}}>{a.icon}</span>
+                  <span style={{whiteSpace:"nowrap"}}>{a.zh}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
         <div style={{marginBottom:22}}><div style={{fontSize:".75rem",color:"#999",marginBottom:6}}>标签</div><div style={{display:"flex",flexWrap:"wrap",gap:7}}>{BADGE_IT.map((b,i)=>(<button key={b} onClick={()=>setForm(f=>({...f,badge:b}))} style={{padding:"5px 14px",borderRadius:999,border:"none",cursor:"pointer",fontSize:".76rem",background:form.badge===b?"#C0392B":"#F0E8E0",color:form.badge===b?"#fff":"#666"}}>{i===0?"无标签":`${BADGE_ZH[i]}/${b}`}</button>))}</div></div>
         <button onClick={submit} disabled={saving} style={{width:"100%",background:saving?"#ccc":"#C0392B",color:"#fff",border:"none",padding:"15px",borderRadius:14,fontSize:"1rem",cursor:saving?"not-allowed":"pointer",fontWeight:700}}>{saving?"保存中...":"保存 / Salva"}</button>
       </div>
