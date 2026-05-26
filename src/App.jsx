@@ -434,7 +434,7 @@ function Logo({ size = 130, onClick }) {
       <img
         src="/logo.jpg"
         alt="东北烧烤"
-        style={{ width:s, height:s, objectFit:"contain" }}
+        style={{ width:s, height:s, objectFit:"contain" ,mixBlendMode:"multiply"}}
       />
 
       {/* 火焰 */}
