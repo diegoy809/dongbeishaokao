@@ -394,9 +394,10 @@ price:20, spicy:false, frozen:false, preorder:false, badge:"speciale", status:"a
 const SHOP_DEFAULT = {
   namezh:"东北烧烤", nameit:"Dong Bei Shao Kao",
   address:"Via Luigi Tosti 51 · 00179 Roma", phone:"06 30329952",
-  hoursOpen:"12:00", hoursClose:"23:00", daysClosed:"Martedì / 周二"
+  hoursOpen:"12:30", hoursClose:"15:00",
+  hoursOpen2:"18:30", hoursClose2:"23:00",
+  daysClosed:"Martedì / 周二"
 };
-
 const CATS = [
   {id:"lengcai", zh:"冷菜",     it:"Antipasti Freddi",      icon:"🥗", col:"#4A7C59"},
   {id:"bbq",     zh:"烧烤",     it:"BBQ Griglia",           icon:"🔥", col:"#C0392B"},
@@ -901,7 +902,7 @@ function MenuView({ menu, lang, setLang, shop, onLogoTap }) {
         <div style={{ color:"rgba(255,255,255,.22)",fontSize:".68rem",marginTop:16,lineHeight:2.4 }}>
           <div>{shop.address}</div>
           <div>{shop.phone}</div>
-          <div>🕐 {shop.hoursOpen} – {shop.hoursClose} &nbsp;|&nbsp; 🚫 {shop.daysClosed}</div>
+          <div>🕐 {shop.hoursOpen}–{shop.hoursClose} &nbsp;🌙 {shop.hoursOpen2}–{shop.hoursClose2} &nbsp;|&nbsp; 🚫 {shop.daysClosed}</div>
           <div style={{ marginTop:6,color:"rgba(255,255,255,.1)",fontSize:".58rem" }}>
             Reg. CE 852/2004 · Reg. CE 853/2004 · Reg. UE 1169/2011 · Reg. CE 1333/2008 · HACCP
           </div>
