@@ -81,7 +81,22 @@ const CATS=[
 ];
 const BADGE_IT=["","popolare","novità","speciale","consigliato"];
 const BADGE_ZH=["","热销","新品","招牌","推荐"];
-
+const ALLERGENS=[
+  {id:"gluten",icon:"🌾",zh:"含麸质谷物",it:"Cereali con glutine"},
+  {id:"crustaceans",icon:"🦐",zh:"甲壳类",it:"Crostacei"},
+  {id:"eggs",icon:"🥚",zh:"鸡蛋",it:"Uova"},
+  {id:"fish",icon:"🐟",zh:"鱼类",it:"Pesce"},
+  {id:"peanuts",icon:"🥜",zh:"花生",it:"Arachidi"},
+  {id:"soy",icon:"🌱",zh:"大豆",it:"Soia"},
+  {id:"milk",icon:"🥛",zh:"乳制品（含乳糖）",it:"Latte (lattosio)"},
+  {id:"nuts",icon:"🌰",zh:"坚果",it:"Frutta a guscio"},
+  {id:"celery",icon:"🥬",zh:"芹菜",it:"Sedano"},
+  {id:"mustard",icon:"🟡",zh:"芥末",it:"Senape"},
+  {id:"sesame",icon:"⚪",zh:"芝麻",it:"Sesamo"},
+  {id:"sulphites",icon:"🧪",zh:"二氧化硫/亚硫酸盐",it:"Anidride solforosa/Solfiti"},
+  {id:"lupin",icon:"🫘",zh:"羽扇豆",it:"Lupini"},
+  {id:"molluscs",icon:"🦑",zh:"软体动物",it:"Molluschi"},
+];
 /* ── ANIMATED LOGO ── */
 function Logo({size=130,onClick}){
   return(
