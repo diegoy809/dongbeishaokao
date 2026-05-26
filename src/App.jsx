@@ -132,7 +132,13 @@ const url=`${window.location.origin}${window.location.pathname}?shop=${shopId}&v
 }
 
 function Pill({col,children}){return(<span style={{fontSize:".6rem",padding:"2px 8px",borderRadius:999,background:`${col}18`,color:col,border:`1px solid ${col}35`,fontWeight:600}}>{children}</span>);}
-
+function AllergenPill({a,label}){
+  return(
+    <span title={label} style={{fontSize:".6rem",padding:"2px 7px",borderRadius:999,background:"rgba(141,110,99,.10)",color:"#8D6E63",border:"1px solid rgba(141,110,99,.25)",fontWeight:700,letterSpacing:.2}}>
+      {a.icon}
+    </span>
+  );
+}
 /* ── MENU VIEW ── */
 function MenuView({menu,lang,setLang,shop,onLogoTap}){
   const [cat,setCat]=useState("lengcai");
@@ -203,6 +209,12 @@ function MenuView({menu,lang,setLang,shop,onLogoTap}){
                     {item.spicy&&<Pill col="#C0392B">🌶 {lang==="zh"?"辣":"Piccante"}</Pill>}
                     {item.frozen&&<Pill col="#1565C0">❄️ {lang==="zh"?"冷冻":"Surgelato"}</Pill>}
                     {item.preorder&&<Pill col="#D4A017">📋 {lang==="zh"?"需预定":"Prenotazione"}</Pill>}
+                    {(Array.isArray(item.allergens)?item.allergens:[]).slice(0,12).map(id=>{
+                      const a=ALLERGENS.find(x=>x.id===id);
+                      if(!a) return null;
+                      const label=lang==="zh"?a.zh:a.it;
+                      return <AllergenPill key={id} a={a} label={label}/>;
+                    })}
                     {bLbl&&bidx>0&&!sold&&<span style={{fontSize:".6rem",padding:"2px 8px",borderRadius:999,fontWeight:700,background:item.badge==="novità"?"#FFF8E1":"#FDE8E8",color:item.badge==="novità"?"#B8860B":"#C0392B",border:`1px solid ${item.badge==="novità"?"#FFD54F":"#FFCDD2"}`}}>{bLbl}</span>}
                   </div>
                 </div>
@@ -219,7 +231,7 @@ function MenuView({menu,lang,setLang,shop,onLogoTap}){
       {/* allergen */}
       <div style={{margin:"8px 16px 16px",padding:"14px 18px",background:"rgba(212,160,23,.05)",border:"1px solid rgba(212,160,23,.16)",borderRadius:12,fontSize:".68rem",color:"#b0a090",lineHeight:1.9}}>
         <div style={{color:"#D4A017",fontWeight:700,marginBottom:4,fontSize:".7rem",letterSpacing:1}}>{lang==="zh"?"⚠ 过敏原声明":"⚠ Dichiarazione Allergeni"}</div>
-        {lang==="zh"?"本餐厅菜品可能含有：麸质、甲壳类、鱼类、软体动物、花生、大豆、乳制品、鸡蛋、芝麻。如有过敏或不耐受，请在点餐前告知服务员。":"I nostri piatti possono contenere: glutine, crostacei, pesce, molluschi, arachidi, soia, latticini, uova, sesamo. Informare il personale in caso di allergie o intolleranze."}
+        {lang==="zh"?"本餐厅菜品可能含有：含麸质谷物、甲壳类、鸡蛋、鱼类、花生、大豆、乳制品（含乳糖）、坚果、芹菜、芥末、芝麻、二氧化硫/亚硫酸盐、羽扇豆、软体动物。如有过敏或不耐受，请在点餐前告知服务员。":"I nostri piatti possono contenere: cereali con glutine, crostacei, uova, pesce, arachidi, soia, latte (lattosio), frutta a guscio, sedano, senape, sesamo, anidride solforosa/solfiti, lupini, molluschi. Informare il personale in caso di allergie o intolleranze."}
       </div>
       {/* footer */}
       <div style={{textAlign:"center",padding:"36px 20px 40px",background:"linear-gradient(0deg,#0D0500,#1A0A00)",marginTop:8}}>
