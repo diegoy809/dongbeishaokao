@@ -1027,8 +1027,8 @@ function AdminPanel({ menu, shopId, saving, shop, setShop, onExit }) {
                   ["意大利语","nameit","Dong Bei Shao Kao"],
                   ["地址","address","Via Luigi Tosti 51"],
                   ["电话","phone","06 30329952"],
-                  ["营业开始时间","hoursOpen","12:00"],
-                  ["营业结束时间","hoursClose","23:00"],
+                  ["上午营业时间","hoursOpen","12:00"],["上午结束时间","hoursClose","23:00"],["晚上营业时间","hoursOpen2","18:30"],
+["晚上结束时间","hoursClose2","23:00"],
                   ["休息日","daysClosed","Martedì / 周二"],
                 ].map(([l,k,ph])=>(
                   <div key={k} style={{ marginBottom:12 }}>
