@@ -596,7 +596,7 @@ function MenuView({ menu, lang, setLang, shop, onLogoTap }) {
           backgroundSize:"52px 52px" }}/>
 
         {/* lang toggle */}
-        <div style={{ position:"absolute",top:14,right:14,display:"flex",borderRadius:999,overflow:"hidden",border:"1px solid rgba(212,160,23,.35)" }}>
+        <div style={{ position:"absolute",top:14,right:14,zIndex:10,display:"flex",borderRadius:999,overflow:"hidden",border:"1px solid rgba(212,160,23,.35)" }}>
           {["it","zh"].map(l=>(
             <button key={l} onClick={()=>setLang(l)} style={{
               padding:"7px 14px",border:"none",cursor:"pointer",fontFamily:"'Noto Serif SC',serif",
