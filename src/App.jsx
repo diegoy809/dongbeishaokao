@@ -855,7 +855,7 @@ function MenuView({ menu, lang, setLang, shop, onLogoTap }) {
 
       {/* ══ FOOTER ══ */}
       <div style={{ textAlign:"center",padding:"36px 20px 40px",
-      background:"#000",
+      background:"#000",}}>
         <Logo size={72}/>
         <div style={{ fontFamily:"'Ma Shan Zheng',serif",color:"#D4A017",fontSize:"1.55rem",
           marginTop:14,letterSpacing:6,textShadow:"0 0 20px rgba(212,160,23,.4)" }}>
