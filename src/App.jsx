@@ -501,7 +501,7 @@ function loadQR() {
             }}>{t.icon} {t.l[lang]}</span>
           ))}
         </div>
-      </div>
+  
 
       {/* ══ STICKY CATEGORY TABS ══ */}
       <div style={{
