@@ -416,69 +416,91 @@ function Logo({ size = 130, onClick }) {
   return (
     <div onClick={onClick} style={{ width:size, height:size, position:"relative", cursor:"default", userSelect:"none", flexShrink:0 }}>
       <style>{`
-        @keyframes logospin  { to { transform: rotate(360deg); } }
-        @keyframes smokerise1 { 0%{transform:translateY(0) translateX(0) scaleX(1);opacity:.7} 100%{transform:translateY(-18px) translateX(-4px) scaleX(1.4);opacity:0} }
-        @keyframes smokerise2 { 0%{transform:translateY(0) translateX(0) scaleX(1);opacity:.6} 100%{transform:translateY(-20px) translateX(5px) scaleX(1.6);opacity:0} }
-        @keyframes smokerise3 { 0%{transform:translateY(0) translateX(0) scaleX(1);opacity:.5} 100%{transform:translateY(-16px) translateX(-2px) scaleX(1.3);opacity:0} }
-        @keyframes ringglow  { 0%,100%{opacity:.5} 50%{opacity:1} }
-        .logo-ring { animation: logospin 22s linear infinite; }
-        .logo-glow { animation: ringglow 3s ease-in-out infinite; }
-        .smoke1 { animation: smokerise1 2.2s ease-out 0s infinite; }
-        .smoke2 { animation: smokerise2 2.7s ease-out 0.8s infinite; }
-        .smoke3 { animation: smokerise3 1.9s ease-out 1.5s infinite; }
+        @keyframes brushSpin { 0%{transform:rotate(-2deg)} 50%{transform:rotate(2deg)} 100%{transform:rotate(-2deg)} }
+        @keyframes flickerRed { 0%,100%{opacity:1} 45%{opacity:.85} 50%{opacity:1} 80%{opacity:.9} }
+        @keyframes dongbeiFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-3px)} }
+        @keyframes emberDrop { 0%{transform:translateY(0) scale(1);opacity:1} 100%{transform:translateY(8px) scale(0);opacity:0} }
+        .logo-circle { animation: brushSpin 4s ease-in-out infinite; transform-origin: center; }
+        .logo-kao { animation: flickerRed 3s ease-in-out infinite; }
+        .logo-dongbei { animation: dongbeiFloat 2.5s ease-in-out infinite; }
+        .logo-ember { animation: emberDrop 1.4s ease-in infinite; }
+        .logo-ember2 { animation: emberDrop 1.4s ease-in 0.5s infinite; }
+        .logo-ember3 { animation: emberDrop 1.4s ease-in 0.9s infinite; }
       `}</style>
       <svg width={size} height={size} viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-        {/* Outer spinning ring */}
-        <g className="logo-ring">
-          <circle cx="60" cy="60" r="57" stroke="#D4A017" strokeWidth="1.2" strokeDasharray="4 5" opacity="0.5"/>
-          {[0,72,144,216,288].map(deg => {
-            const rad = (deg - 90) * Math.PI / 180;
-            const x = 60 + 57 * Math.cos(rad);
-            const y = 60 + 57 * Math.sin(rad);
-            return <circle key={deg} cx={x} cy={y} r="2.5" fill="#D4A017" opacity="0.8"/>;
-          })}
+
+        {/* 黑色毛笔圆圈 — 用 strokeDasharray 模拟毛笔笔触 */}
+        <g className="logo-circle">
+          <circle cx="54" cy="72" r="34"
+            stroke="#1a1008" strokeWidth="5"
+            strokeLinecap="round"
+            strokeDasharray="180 28"
+            strokeDashoffset="10"
+            fill="none"
+            opacity="0.92"
+          />
+          {/* 圆圈缺口处的毛笔飞白效果 */}
+          <circle cx="54" cy="72" r="34"
+            stroke="#1a1008" strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeDasharray="12 196"
+            strokeDashoffset="-172"
+            fill="none"
+            opacity="0.4"
+          />
         </g>
-        {/* Main dark circle */}
-        <circle cx="60" cy="60" r="50" fill="url(#bgGrad)" stroke="#D4A017" strokeWidth="2.5"/>
-        {/* Glow ring */}
-        <circle className="logo-glow" cx="60" cy="60" r="50" stroke="#D4A017" strokeWidth="4" opacity="0.15" fill="none"/>
-        {/* Smoke wisps */}
-        <g className="smoke1">
-          <ellipse cx="47" cy="34" rx="3" ry="5" fill="#D4A017" opacity="0.6"/>
+
+        {/* 红色草书"烤"字主体 */}
+        <g className="logo-kao">
+          {/* 左侧火字旁 竖撇 */}
+          <path d="M36 58 Q34 65 35 74 Q36 80 34 86" stroke="#CC1010" strokeWidth="3.5" strokeLinecap="round" fill="none"/>
+          {/* 火字旁 点 */}
+          <path d="M31 63 Q33 61 35 63" stroke="#CC1010" strokeWidth="2.5" strokeLinecap="round" fill="none"/>
+          <path d="M31 70 Q33 68 36 70" stroke="#CC1010" strokeWidth="2.5" strokeLinecap="round" fill="none"/>
+          <path d="M31 77 Q33 75 35 77" stroke="#CC1010" strokeWidth="2" strokeLinecap="round" fill="none"/>
+          {/* 右侧"考"字 横 */}
+          <path d="M40 60 Q50 58 60 59" stroke="#CC1010" strokeWidth="3" strokeLinecap="round" fill="none"/>
+          {/* 竖 */}
+          <path d="M50 59 Q49 67 48 75" stroke="#CC1010" strokeWidth="3" strokeLinecap="round" fill="none"/>
+          {/* 下横 */}
+          <path d="M40 68 Q50 66 60 67" stroke="#CC1010" strokeWidth="2.5" strokeLinecap="round" fill="none"/>
+          {/* 撇 */}
+          <path d="M44 75 Q42 82 38 88" stroke="#CC1010" strokeWidth="3" strokeLinecap="round" fill="none"/>
+          {/* 捺/竖弯钩 */}
+          <path d="M54 74 Q57 80 56 87 Q55 92 60 93" stroke="#CC1010" strokeWidth="3" strokeLinecap="round" fill="none"/>
+          {/* 草书连笔底部波浪 */}
+          <path d="M34 87 Q40 92 48 90 Q56 88 60 93" stroke="#CC1010" strokeWidth="2.5" strokeLinecap="round" fill="none"/>
+          {/* 竖线穿圆（类似图片中的长竖） */}
+          <path d="M50 42 L50 60" stroke="#CC1010" strokeWidth="2.5" strokeLinecap="round"/>
         </g>
-        <g className="smoke2">
-          <ellipse cx="60" cy="31" rx="3.5" ry="6" fill="#D4A017" opacity="0.5"/>
+
+        {/* 右侧串签图案 */}
+        <g className="logo-kao" style={{animationDelay:"0.3s"}}>
+          {/* 签杆 */}
+          <path d="M68 52 Q70 62 72 72 Q73 80 76 88" stroke="#CC1010" strokeWidth="2" strokeLinecap="round" fill="none"/>
+          {/* 肉串圆形 */}
+          <circle cx="69.5" cy="56" r="3.5" fill="#CC1010" opacity="0.85"/>
+          <circle cx="71" cy="64" r="3" fill="#CC1010" opacity="0.8"/>
+          <circle cx="72.5" cy="72" r="3" fill="#CC1010" opacity="0.75"/>
+          {/* 签尾环 */}
+          <circle cx="77" cy="91" r="4" stroke="#CC1010" strokeWidth="2" fill="none"/>
+          <path d="M77 95 L77 100" stroke="#CC1010" strokeWidth="2" strokeLinecap="round"/>
         </g>
-        <g className="smoke3">
-          <ellipse cx="73" cy="34" rx="3" ry="5" fill="#D4A017" opacity="0.55"/>
+
+        {/* 炭火余烬（底部） */}
+        <g>
+          <circle className="logo-ember"  cx="48" cy="100" r="1.5" fill="#CC1010"/>
+          <circle className="logo-ember2" cx="52" cy="102" r="1"   fill="#FF4400"/>
+          <circle className="logo-ember3" cx="44" cy="101" r="1.2" fill="#CC1010"/>
         </g>
-        {/* BBQ Grill body (烤炉) */}
-        {/* Grill dome top */}
-        <path d="M30 62 Q30 40 60 40 Q90 40 90 62 Z" fill="#C0392B" opacity="0.9"/>
-        <path d="M30 62 Q30 40 60 40 Q90 40 90 62 Z" fill="none" stroke="#D4A017" strokeWidth="1.5"/>
-        {/* Grill grate lines */}
-        <line x1="32" y1="58" x2="88" y2="58" stroke="#D4A017" strokeWidth="1.2" opacity="0.7"/>
-        <line x1="36" y1="53" x2="84" y2="53" stroke="#D4A017" strokeWidth="1" opacity="0.5"/>
-        <line x1="48" y1="58" x2="48" y2="42" stroke="#D4A017" strokeWidth="1" opacity="0.4"/>
-        <line x1="60" y1="58" x2="60" y2="40" stroke="#D4A017" strokeWidth="1" opacity="0.4"/>
-        <line x1="72" y1="58" x2="72" y2="42" stroke="#D4A017" strokeWidth="1" opacity="0.4"/>
-        {/* Grill base / bowl */}
-        <rect x="28" y="62" width="64" height="8" rx="4" fill="#8B2500" stroke="#D4A017" strokeWidth="1.2"/>
-        {/* Legs */}
-        <line x1="42" y1="70" x2="36" y2="90" stroke="#D4A017" strokeWidth="2.5" strokeLinecap="round"/>
-        <line x1="60" y1="70" x2="60" y2="90" stroke="#D4A017" strokeWidth="2.5" strokeLinecap="round"/>
-        <line x1="78" y1="70" x2="84" y2="90" stroke="#D4A017" strokeWidth="2.5" strokeLinecap="round"/>
-        {/* Cross bar on legs */}
-        <line x1="38" y1="82" x2="82" y2="82" stroke="#D4A017" strokeWidth="1.8" strokeLinecap="round" opacity="0.7"/>
-        {/* Chinese character 烤 stylized */}
-        <text x="60" y="108" textAnchor="middle" fontFamily="serif" fontSize="11" fill="#D4A017" fontWeight="bold" opacity="0.9">烤</text>
-        {/* Defs */}
-        <defs>
-          <radialGradient id="bgGrad" cx="40%" cy="35%" r="70%">
-            <stop offset="0%" stopColor="#2C1500"/>
-            <stop offset="100%" stopColor="#0D0500"/>
-          </radialGradient>
-        </defs>
+
+        {/* 右上角"东北"绿字 */}
+        <g className="logo-dongbei">
+          <text x="62" y="34" fontFamily="'Ma Shan Zheng',serif" fontSize="14"
+            fill="#2DBD8A" stroke="#fff" strokeWidth="2" paintOrder="stroke"
+            fontWeight="bold" letterSpacing="1">东北</text>
+        </g>
+
       </svg>
     </div>
   );
@@ -550,9 +572,15 @@ function HoursBanner({ shop, lang }) {
       borderBottom:"1px solid rgba(212,160,23,.18)",
     }}>
       <span style={{ display:"flex",alignItems:"center",gap:6,fontSize:".72rem",color:"#D4A017",fontWeight:700 }}>
-        🕐 {lang==="zh"?"营业时间":"Orario"}:&nbsp;
+        🕐 {lang==="zh"?"午市":"Pranzo"}:&nbsp;
         <span style={{ color:"rgba(255,255,255,.8)",fontWeight:400 }}>
           {shop.hoursOpen} – {shop.hoursClose}
+        </span>
+      </span>
+      <span style={{ display:"flex",alignItems:"center",gap:6,fontSize:".72rem",color:"#D4A017",fontWeight:700 }}>
+        🌙 {lang==="zh"?"晚市":"Cena"}:&nbsp;
+        <span style={{ color:"rgba(255,255,255,.8)",fontWeight:400 }}>
+          {shop.hoursOpen2} – {shop.hoursClose2}
         </span>
       </span>
       {shop.daysClosed && (
