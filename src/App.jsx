@@ -414,95 +414,66 @@ const BADGE_ZH = ["","热销","新品","招牌","推荐"];
    LOGO SVG — redrawn from reference image (烤炉 BBQ grill style)
 ════════════════════════════════════════════════════════════════ */
 function Logo({ size = 130, onClick }) {
+  const s = size;
   return (
-    <div onClick={onClick} style={{ width:size, height:size, position:"relative", cursor:"default", userSelect:"none", flexShrink:0 }}>
+    <div onClick={onClick} style={{ width:s, height:s*1.15, position:"relative", cursor:"default", userSelect:"none", flexShrink:0, display:"flex", flexDirection:"column", alignItems:"center" }}>
       <style>{`
-        @keyframes brushSpin { 0%{transform:rotate(-2deg)} 50%{transform:rotate(2deg)} 100%{transform:rotate(-2deg)} }
-        @keyframes flickerRed { 0%,100%{opacity:1} 45%{opacity:.85} 50%{opacity:1} 80%{opacity:.9} }
-        @keyframes dongbeiFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-3px)} }
-        @keyframes emberDrop { 0%{transform:translateY(0) scale(1);opacity:1} 100%{transform:translateY(8px) scale(0);opacity:0} }
-        .logo-circle { animation: brushSpin 4s ease-in-out infinite; transform-origin: center; }
-        .logo-kao { animation: flickerRed 3s ease-in-out infinite; }
-        .logo-dongbei { animation: dongbeiFloat 2.5s ease-in-out infinite; }
-        .logo-ember { animation: emberDrop 1.4s ease-in infinite; }
-        .logo-ember2 { animation: emberDrop 1.4s ease-in 0.5s infinite; }
-        .logo-ember3 { animation: emberDrop 1.4s ease-in 0.9s infinite; }
+        @keyframes flame1 { 0%,100%{transform:scaleY(1) translateX(0);opacity:.9} 50%{transform:scaleY(1.18) translateX(-2px);opacity:1} }
+        @keyframes flame2 { 0%,100%{transform:scaleY(1) translateX(0);opacity:.8} 50%{transform:scaleY(1.25) translateX(2px);opacity:1} }
+        @keyframes flame3 { 0%,100%{transform:scaleY(1);opacity:.7} 50%{transform:scaleY(1.1);opacity:.95} }
+        @keyframes ember  { 0%{transform:translateY(0) translateX(0);opacity:1} 100%{transform:translateY(-14px) translateX(var(--dx));opacity:0} }
+        .fl1{animation:flame1 1.2s ease-in-out infinite;transform-origin:bottom center;}
+        .fl2{animation:flame2 1.5s ease-in-out infinite;transform-origin:bottom center;}
+        .fl3{animation:flame3 0.9s ease-in-out infinite;transform-origin:bottom center;}
+        .em1{--dx:-5px;animation:ember 1.6s ease-out 0s infinite;}
+        .em2{--dx:4px; animation:ember 1.9s ease-out 0.6s infinite;}
+        .em3{--dx:0px; animation:ember 1.4s ease-out 1.1s infinite;}
       `}</style>
-      <svg width={size} height={size} viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
 
-        {/* 黑色毛笔圆圈 — 用 strokeDasharray 模拟毛笔笔触 */}
-        <g className="logo-circle">
-          <circle cx="54" cy="72" r="34"
-            stroke="#1a1008" strokeWidth="5"
-            strokeLinecap="round"
-            strokeDasharray="180 28"
-            strokeDashoffset="10"
-            fill="none"
-            opacity="0.92"
-          />
-          {/* 圆圈缺口处的毛笔飞白效果 */}
-          <circle cx="54" cy="72" r="34"
-            stroke="#1a1008" strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeDasharray="12 196"
-            strokeDashoffset="-172"
-            fill="none"
-            opacity="0.4"
-          />
-        </g>
+      {/* 静态 logo 图片 */}
+      <img
+        src="/logo.jpg"
+        alt="东北烧烤"
+        style={{ width:s, height:s, objectFit:"contain" }}
+      />
 
-        {/* 红色草书"烤"字主体 */}
-        <g className="logo-kao">
-          {/* 左侧火字旁 竖撇 */}
-          <path d="M36 58 Q34 65 35 74 Q36 80 34 86" stroke="#CC1010" strokeWidth="3.5" strokeLinecap="round" fill="none"/>
-          {/* 火字旁 点 */}
-          <path d="M31 63 Q33 61 35 63" stroke="#CC1010" strokeWidth="2.5" strokeLinecap="round" fill="none"/>
-          <path d="M31 70 Q33 68 36 70" stroke="#CC1010" strokeWidth="2.5" strokeLinecap="round" fill="none"/>
-          <path d="M31 77 Q33 75 35 77" stroke="#CC1010" strokeWidth="2" strokeLinecap="round" fill="none"/>
-          {/* 右侧"考"字 横 */}
-          <path d="M40 60 Q50 58 60 59" stroke="#CC1010" strokeWidth="3" strokeLinecap="round" fill="none"/>
-          {/* 竖 */}
-          <path d="M50 59 Q49 67 48 75" stroke="#CC1010" strokeWidth="3" strokeLinecap="round" fill="none"/>
-          {/* 下横 */}
-          <path d="M40 68 Q50 66 60 67" stroke="#CC1010" strokeWidth="2.5" strokeLinecap="round" fill="none"/>
-          {/* 撇 */}
-          <path d="M44 75 Q42 82 38 88" stroke="#CC1010" strokeWidth="3" strokeLinecap="round" fill="none"/>
-          {/* 捺/竖弯钩 */}
-          <path d="M54 74 Q57 80 56 87 Q55 92 60 93" stroke="#CC1010" strokeWidth="3" strokeLinecap="round" fill="none"/>
-          {/* 草书连笔底部波浪 */}
-          <path d="M34 87 Q40 92 48 90 Q56 88 60 93" stroke="#CC1010" strokeWidth="2.5" strokeLinecap="round" fill="none"/>
-          {/* 竖线穿圆（类似图片中的长竖） */}
-          <path d="M50 42 L50 60" stroke="#CC1010" strokeWidth="2.5" strokeLinecap="round"/>
-        </g>
-
-        {/* 右侧串签图案 */}
-        <g className="logo-kao" style={{animationDelay:"0.3s"}}>
-          {/* 签杆 */}
-          <path d="M68 52 Q70 62 72 72 Q73 80 76 88" stroke="#CC1010" strokeWidth="2" strokeLinecap="round" fill="none"/>
-          {/* 肉串圆形 */}
-          <circle cx="69.5" cy="56" r="3.5" fill="#CC1010" opacity="0.85"/>
-          <circle cx="71" cy="64" r="3" fill="#CC1010" opacity="0.8"/>
-          <circle cx="72.5" cy="72" r="3" fill="#CC1010" opacity="0.75"/>
-          {/* 签尾环 */}
-          <circle cx="77" cy="91" r="4" stroke="#CC1010" strokeWidth="2" fill="none"/>
-          <path d="M77 95 L77 100" stroke="#CC1010" strokeWidth="2" strokeLinecap="round"/>
-        </g>
-
-        {/* 炭火余烬（底部） */}
-        <g>
-          <circle className="logo-ember"  cx="48" cy="100" r="1.5" fill="#CC1010"/>
-          <circle className="logo-ember2" cx="52" cy="102" r="1"   fill="#FF4400"/>
-          <circle className="logo-ember3" cx="44" cy="101" r="1.2" fill="#CC1010"/>
-        </g>
-
-        {/* 右上角"东北"绿字 */}
-        <g className="logo-dongbei">
-          <text x="62" y="34" fontFamily="'Ma Shan Zheng',serif" fontSize="14"
-            fill="#2DBD8A" stroke="#fff" strokeWidth="2" paintOrder="stroke"
-            fontWeight="bold" letterSpacing="1">东北</text>
-        </g>
-
-      </svg>
+      {/* 火焰 */}
+      <div style={{ position:"relative", width:s*0.5, height:s*0.28, marginTop:-s*0.06 }}>
+        <svg width="100%" height="100%" viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg">
+          {/* 外层大火 */}
+          <g className="fl2">
+            <ellipse cx="40" cy="38" rx="18" ry="12" fill="url(#fg2)" opacity="0.85"/>
+          </g>
+          {/* 中层火 */}
+          <g className="fl1">
+            <ellipse cx="40" cy="36" rx="11" ry="16" fill="url(#fg1)"/>
+          </g>
+          {/* 内芯亮火 */}
+          <g className="fl3">
+            <ellipse cx="40" cy="37" rx="5.5" ry="9" fill="url(#fg3)"/>
+          </g>
+          {/* 火星 */}
+          <circle className="em1" cx="33" cy="30" r="1.5" fill="#FF9500"/>
+          <circle className="em2" cx="47" cy="28" r="1.2" fill="#FFCC00"/>
+          <circle className="em3" cx="40" cy="26" r="1"   fill="#FF6600"/>
+          <defs>
+            <radialGradient id="fg1" cx="50%" cy="90%" r="60%">
+              <stop offset="0%"   stopColor="#FFE066"/>
+              <stop offset="40%"  stopColor="#FF6A00"/>
+              <stop offset="100%" stopColor="#CC1500" stopOpacity="0"/>
+            </radialGradient>
+            <radialGradient id="fg2" cx="50%" cy="80%" r="65%">
+              <stop offset="0%"   stopColor="#FF8C00"/>
+              <stop offset="100%" stopColor="#8B0000" stopOpacity="0"/>
+            </radialGradient>
+            <radialGradient id="fg3" cx="50%" cy="85%" r="60%">
+              <stop offset="0%"   stopColor="#FFFBE0"/>
+              <stop offset="60%"  stopColor="#FFD200"/>
+              <stop offset="100%" stopColor="#FF4400" stopOpacity="0"/>
+            </radialGradient>
+          </defs>
+        </svg>
+      </div>
     </div>
   );
 }
