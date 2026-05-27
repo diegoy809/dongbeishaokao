@@ -366,7 +366,7 @@ price:20, spicy:false, frozen:false, preorder:false, badge:"speciale", status:"a
 
 
 
-{id:"y61",cat:"chaocai",code:"61",
+{id:"y49b",cat:"chaocai",code:"49b",
 zh:{name:"溜肉段", desc:"猪肉 洋葱 尖椒 酱油 淀粉 蚝油"},
 it:{name:"Bocconcini di maiale fritti in salsa",
 desc:"maiale, cipolla, peperone, salsa di soia, amido, salsa di ostriche"},
