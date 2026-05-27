@@ -447,7 +447,7 @@ const CATS = [
   {id:"lengcai", zh:"冷菜",     it:"Antipasti Freddi",      icon:"🥗", col:"#4A7C59"},
   {id:"bbq",     zh:"烧烤",     it:"BBQ Griglia",           icon:"🔥", col:"#C0392B"},
   {id:"haixian", zh:"海鲜热菜", it:"Piatti Caldi di Mare",  icon:"🦐", col:"#1565C0"},
-  {id:"yulei",   zh:"鱼类菜品", it:"Piatti di Pesce",       icon:"🐟", col:"#00838F"},
+  {id:"chaocai",   zh:"炒菜", it:"Piatti di Pesce",       icon:"🐟", col:"#00838F"},
   {id:"zhushi",  zh:"主食面食", it:"Piatti di Pasta",       icon:"🍜", col:"#6A3D9A"},
   {id:"dolci",   zh:"甜品",     it:"Dolci & Caffè",         icon:"🍨", col:"#AD1457"},
 ];
