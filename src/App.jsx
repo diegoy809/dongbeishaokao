@@ -1353,10 +1353,14 @@ export default function App() {
     tapT.current=setTimeout(()=>{taps.current=0;},2000);
     if(taps.current>=5){ taps.current=0; setPin(true); setPinV(""); setPinE(false); }
   };
-  const submitPin = ()=>{
-    if(pinVal==="dongbei"){ setAdmin(true); setPin(false); setView("admin"); }
-    else { setPinE(true); setPinV(""); setTimeout(()=>setPinE(false),1500); }
-  };
+  const submitPin = async ()=>{
+  if(pinVal==="dongbei"){
+    const auth = getAuth();
+    await signInAnonymously(auth);
+    setAdmin(true); setPin(false); setView("admin");
+  }
+  else { setPinE(true); setPinV(""); setTimeout(()=>setPinE(false),1500); }
+};
 
   /* loading screen */
   if (loading) return (
